@@ -1,8 +1,6 @@
 markdown
 # Stock Market Dashboard 
 
-![Dashboard Screenshot](./public/screenshot.png) <!-- Add a screenshot if available -->
-
 A responsive React-based dashboard for visualizing Indian stock market indices (Nifty 50, Nifty Next 50, etc.) from CSV data. Features interactive charts with multiple metrics and a scrollable sidebar for index selection.
 
 ## Features 
