@@ -78,8 +78,8 @@ const App = () => {
                 <div 
                   className="list-group list-group-flush"
                   style={{ 
-                    maxHeight: "calc(100vh - 150px)", // Adjust based on your needs
-                    overflowY: "auto" // Enable vertical scrolling
+                    maxHeight: "calc(100vh - 150px)", 
+                    overflowY: "auto" 
                   }}
                 >
                   {indexNames.map((name) => (
