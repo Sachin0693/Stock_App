@@ -10,28 +10,24 @@ import {
   Legend,
 } from "chart.js";
 
-// Registering necessary chart.js components
 ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement, Tooltip, Legend);
 
 const ChartComponent = ({ selectedIndex, data }) => {
-  // Set default metric to 'open_index_value'
   const [selectedMetric, setSelectedMetric] = useState("open_index_value");
 
-  // Filter data based on selected index
   const filteredData = data.filter((row) => row.index_name === selectedIndex);
 
-  // Prepare the chart data with proper handling
   const chartData = {
     labels: filteredData.map((row) => row.index_date), // X-axis labels
     datasets: [
       {
-        label: selectedMetric.replace(/_/g, " ").toUpperCase(), // Label for chart
+        label: selectedMetric.replace(/_/g, " ").toUpperCase(), 
         data: filteredData.map((row) => {
           const value = row[selectedMetric];
-          if (value === "NA" || value === "" || value == null) return null; // Handle invalid data
+          if (value === "NA" || value === "" || value == null) return null; 
           const cleanedValue = value.toString().replace(/,/g, ""); // Clean comma
           const parsedValue = parseFloat(cleanedValue);
-          return isNaN(parsedValue) ? null : parsedValue; // Return valid number or null
+          return isNaN(parsedValue) ? null : parsedValue; 
         }),
         fill: false,
         borderColor: "#007bff", // Line color
@@ -41,7 +37,6 @@ const ChartComponent = ({ selectedIndex, data }) => {
     ],
   };
 
-  // List of possible metrics to select
   const metricsOptions = [
     "open_index_value",
     "high_index_value",
@@ -56,7 +51,6 @@ const ChartComponent = ({ selectedIndex, data }) => {
     "div_yield",
   ];
 
-  // Handle change in selected metric
   const handleRadioButtonChange = (metric) => {
     setSelectedMetric(metric); // Update selected metric
   };
@@ -76,7 +70,7 @@ const ChartComponent = ({ selectedIndex, data }) => {
                 type="radio"
                 name="metric"
                 checked={selectedMetric === m}
-                onChange={() => handleRadioButtonChange(m)} // Handle change in metric
+                onChange={() => handleRadioButtonChange(m)} 
               />
               <label className="form-check-label">
                 {m.replace(/_/g, " ").toUpperCase()}
@@ -89,9 +83,9 @@ const ChartComponent = ({ selectedIndex, data }) => {
       {/* Chart Display */}
       <div className="bg-light p-3 rounded shadow">
         {filteredData.length === 0 ? (
-          <p>No data available for this company.</p> // If no data available
+          <p>No data available for this company.</p> 
         ) : (
-          <Line data={chartData} /> // Display chart if data is available
+          <Line data={chartData} /> 
         )}
       </div>
     </div>
